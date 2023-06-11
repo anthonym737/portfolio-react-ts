@@ -14,18 +14,26 @@ import
   Toolbar, 
   Typography 
 } from "@mui/material";
+// import * as path from "path";
+import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// import { routes, getRoutes } from "../routes/routes";
 
 interface Props {
   window?: () => Window;
+  title: string;
+  // navigateTo: (path: string, ...params: any[]) => void;
 }
 
 const drawerWidth = 240;
-const navItems = ['CV','Réalisations profesionnelles', 'Stages', 'Veilles technologique'];
+const navItems = ['CV','Realisations professionnelles', 'Stages', 'Veille technologique'];
 
-export default function NavBar(props: Props) {
-  const { window } = props;
+export function NavBar(props: Props) {
+  const { window, title } = props;
   const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setOpen((prevState) => !prevState);
@@ -38,13 +46,21 @@ export default function NavBar(props: Props) {
       </Typography>
       <Divider/>
       <List>
-        {navItems.map((item) => (
+      {navItems.map((item) => {
+        let path: string;
+        if(item === 'CV') {
+          path = '/';
+        } else {
+          path = `/${item.toLowerCase().replace(' ', '-')}`;
+        }
+        return (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center'}}>
+            <ListItemButton sx={{ textAlign: 'center' }} onClick={() => navigate(path)}>
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
-        ))}
+        );
+      })}
       </List>
     </Box>
   );
@@ -63,22 +79,35 @@ export default function NavBar(props: Props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none'}}}
           >
-            
+            <MenuIcon/>
           </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block'} }}
-
+            sx={{ 
+              flexGrow: 1, 
+              display: { 
+                xs: 'none', 
+                sm: 'block'
+              }
+            }}
           >
             Portfolio
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block'} }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff'}}>
-                {item}
-              </Button>
-            ))}
+            {navItems.map((item) => {
+              let path: string;
+              if (item === 'CV'){
+                path = '/';
+              } else {
+                path = `/${item.toLowerCase().replace(' ', '-')}`;
+              }
+              return (
+                <Button key={item} sx={{ color: '#fff'}} onClick={() => navigate(path)}>
+                  {item}
+                </Button>
+              );
+            })}
           </Box>
         </Toolbar>
       </AppBar>
@@ -100,8 +129,26 @@ export default function NavBar(props: Props) {
         </Drawer>        
       </Box>
       <Box component="main" sx={{p: 3}}>
-        <Toolbar />
-        <Typography variant="h1">Mon CV</Typography>
+        <Typography 
+          variant="h1"
+          sx={{ 
+            flexGrow: 1, 
+            display: { 
+              xs: 'none', 
+              sm: 'block'}, 
+            backgroundColor: '#1976D2', 
+            color: '#fff', 
+            borderRadius: 2, 
+            p: 1,
+            position: "fixed",
+            top: '20%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {title}
+        </Typography>
       </Box>
     </Box>
   )
