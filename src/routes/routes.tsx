@@ -15,7 +15,7 @@ export const routes = {
     RealisationPage: {
         path: "/realisations-professionnelles",
         key: "realisation",
-        label: "Réalisations technologiques",
+        label: "Réalisations professionnelles",
         element: RealisationPage,
         exact: true,
     },

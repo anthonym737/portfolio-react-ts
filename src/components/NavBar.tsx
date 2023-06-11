@@ -18,6 +18,7 @@ import
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getRoutes, routes } from "../routes/routes";
 // import { routes, getRoutes } from "../routes/routes";
 
 interface Props {
@@ -34,6 +35,8 @@ export function NavBar(props: Props) {
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
+
+  const routes = getRoutes();
 
   const handleDrawerToggle = () => {
     setOpen((prevState) => !prevState);
@@ -95,19 +98,12 @@ export function NavBar(props: Props) {
             Portfolio
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block'} }}>
-            {navItems.map((item) => {
-              let path: string;
-              if (item === 'CV'){
-                path = '/';
-              } else {
-                path = `/${item.toLowerCase().replace(' ', '-')}`;
-              }
-              return (
-                <Button key={item} sx={{ color: '#fff'}} onClick={() => navigate(path)}>
-                  {item}
-                </Button>
-              );
-            })}
+            {routes.map((route) => (
+              <Button key={route.key} sx={{ color: '#fff'}} onClick={() => navigate(route.path)}>
+                {route.label}
+              </Button>
+            ))}
+            
           </Box>
         </Toolbar>
       </AppBar>
@@ -153,3 +149,19 @@ export function NavBar(props: Props) {
     </Box>
   )
 }
+
+/* Inutile */
+
+{/* {navItems.map((item) => {
+              let path: string;
+              if (item === 'CV'){
+                path = '/';
+              } else {
+                path = `/${item.toLowerCase().replace(' ', '-')}`;
+              }
+              return (
+                <Button key={item} sx={{ color: '#fff'}} onClick={() => navigate(path)}>
+                  {item}
+                </Button>
+              );
+            })} */}
