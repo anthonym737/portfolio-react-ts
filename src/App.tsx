@@ -1,12 +1,11 @@
-import { BrowserRouter as Router, Route, Navigate, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
 
-import { StagePage } from "./pages/StagePage";
-import { VeilleTechnoPage } from "./pages/VeilleTechnoPage";
+// import { StagePage } from "./pages/StagePage";
+// import { VeilleTechnoPage } from "./pages/VeilleTechnoPage";
 import { NavBar } from "./components/NavBar";
-import { CVPage } from "./pages/CVPage";
-import { RealisationPage } from "./pages/RealisationPage";
+
 import { getRoutes } from "./routes/routes";
 
 function App() {

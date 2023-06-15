@@ -1,0 +1,15 @@
+initile:
+
+{/* {navItems.map((item) => {
+              let path: string;
+              if (item === 'CV'){
+                path = '/';
+              } else {
+                path = `/${item.toLowerCase().replace(' ', '-')}`;
+              }
+              return (
+                <Button key={item} sx={{ color: '#fff'}} onClick={() => navigate(path)}>
+                  {item}
+                </Button>
+              );
+            })} */}

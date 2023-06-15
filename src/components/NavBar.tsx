@@ -18,7 +18,8 @@ import
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getRoutes, routes } from "../routes/routes";
+import { getRoutes } from "../routes/routes";
+
 // import { routes, getRoutes } from "../routes/routes";
 
 interface Props {
@@ -30,7 +31,7 @@ interface Props {
 const drawerWidth = 240;
 const navItems = ['CV','Realisations professionnelles', 'Stages', 'Veille technologique'];
 
-export function NavBar(props: Props) {
+function NavBar(props: Props) {
   const { window, title } = props;
   const [open, setOpen] = useState(false);
 
@@ -150,18 +151,5 @@ export function NavBar(props: Props) {
   )
 }
 
-/* Inutile */
 
-{/* {navItems.map((item) => {
-              let path: string;
-              if (item === 'CV'){
-                path = '/';
-              } else {
-                path = `/${item.toLowerCase().replace(' ', '-')}`;
-              }
-              return (
-                <Button key={item} sx={{ color: '#fff'}} onClick={() => navigate(path)}>
-                  {item}
-                </Button>
-              );
-            })} */}
+export { NavBar };
