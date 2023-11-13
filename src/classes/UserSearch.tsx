@@ -1,4 +1,5 @@
-import { Component } from "react";
+
+import React,{ Component } from "react";
 
 interface User {
     name: string;
